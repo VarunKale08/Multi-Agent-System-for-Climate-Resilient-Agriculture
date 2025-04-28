@@ -1,0 +1,138 @@
+crop_agent_task:
+  description: >
+    Conduct thorough research on {topic} with a focus on a Crop about its Season and Planting,
+    variety of the crop, list the variety, which variety can be suitable for which region/district, growth cycle, water management techniques, fertilizers to be used using the knowledge provided and based on {location} and {season}.
+  expected_output: >
+    A structured report presenting key aspects of {topic}, {season}, {location} including:
+    Season & Varieties
+    Morphological Characters
+    District/ Season
+    Crop Management
+    Improved Technologies
+    Fertilizer Management
+    Water Management
+    Pre Harvest Practices
+  agent: crop_agent
+
+climate_agent_task:
+  description: >
+    Get the weather data about users  {location} from the weather_tool, present it properly to the user.
+  expected_output: >
+    Give weather information to the user based on {location} provided to the weather_tool
+    Create a section for "current weather info" and give information about the data gathered from weather_tool based on the {location}  
+  agent: climate_agent
+
+soil_health_agent_task:
+  description: >
+    Gather the user’s soil data for {soil_type}, including nitrogen ({n} kg/ha), phosphorus ({p} kg/ha), and potassium ({k} kg/ha). Utilize your pre-loaded knowledge on soil health and integrate local weather conditions and other regional factors for {location} (as provided by the climate_agent) to generate comprehensive recommendations for soil improvement.
+  expected_output: >
+    Produce a detailed soil health improvement guide that includes tailored fertilizer recommendations and addresses both the current local weather conditions and the unique regional characteristics of {location} using climate_agent.
+  agent: soil_health_agent
+
+fertilizer_agent_task:
+  description: >
+    Synthesize fertilizer recommendations by integrating findings from the crop and soil health agents, the input parameters ({topic}, {soil_type} growth in {location}), and your pre-loaded agricultural knowledge. Your report should detail the crop's nutrient requirements along with soil nutrient deficits, and then merge these insights to provide detailed fertilizer guidance including type, dosage, and application schedule.
+  expected_output: >
+    A comprehensive report that includes:
+    - A summary of the crop's nutrient requirements based on {topic} and the growth stage.
+    - An analysis of the soil's nutrient profile for {soil_type} in {location} along with any deficiencies.
+    - Detailed fertilizer recommendations that specify the type, amount, and timing for application, using insights from both the agents’ outputs and pre-loaded agronomic knowledge.
+  agent: fertilizer_agent
+
+scheme_policy_agent_task: 
+  description: > 
+    Gather and present detailed information on government policies, subsidies, and schemes relevant to {topic} cultivation in {location}. Focus on programs that reduce input costs or improve access to quality fertilizers by integrating pre-loaded knowledge regarding current agricultural financial support initiatives. 
+  expected_output: > 
+    A comprehensive report section that outlines applicable government policies, subsidy options, and financial support schemes for {topic} farmers in {location}. Include practical guidance on how to access these benefits and how they can reduce overall production costs. agent: scheme_policy_agent
+  agent: scheme_policy_agent
+
+market_agent_task: 
+ description: > 
+   Conduct comprehensive market research on fertilizer products in {location}. Your report should include current pricing data, historical price trends, an overview of economic factors affecting fertilizer markets, and analysis of competitor activity. Ensure that the report contains at least one hyperlink to a reputable website that serves as a source for fertilizer market information. 
+ expected_output: > 
+  The list of websites with the most relevant information about fertilizer products in {location}. Hyperlinks to trusted market data sources for further reference 
+  And prices of fertilizers if present besides the link.
+ agent: market_agent
+
+# reporting_task:
+#   description: >
+#     Review the context and outputs received from all agents. Expand each topic into a full section for the final report.
+#     Ensure the report is structured, follows a logical flow, and integrates the findings from each agent's contributions seamlessly.
+#   expected_output: >
+#     A comprehensive report that includes the following sections:
+#     1) Crop Agent Section (covering crop season, varieties, growth cycle, crop management, improved technologies, fertilizer management, water management, and pre-harvest practices)
+#     2) Climate Agent Section (detailing current weather information and other climate data relevant for {location})
+#     3) Soil Health Agent Section (providing tailored soil improvement guidelines and fertility assessments based on local conditions)
+#     4) Fertilizer Agent Section (offering detailed fertilizer recommendations—including type, amount, application schedule, and integration of pre-loaded agronomic knowledge—tailored for {topic}, {soil_type} growth in {location})
+#     5) Scheme Policy Agent Section (detailing applicable government policies, subsidy options, and financial support schemes available to {topic} farmers in {location})
+#     6) Market Agent Section (present user with market place links/sources for fertilizer)
+#   agent: reporting_analyst
+
+# reporting_task:
+#   description: >
+#     Compile each agent’s findings into a concise, farmer-friendly report. Summaries should simplify long paragraphs into a straightforward structure while preserving the original content exactly.
+#   expected_output: >
+#     The report must include six sections: Crop, Climate, Soil Health, Fertilizer, Schemes, and Market.
+#     For each section:
+#     - Use a heading in the form " Information ()"
+#     - Summarize only the available details.
+#     - For Crop: include season, varieties, growth cycle, crop management practices, new technologies, fertilizer and water management, and pre-harvest steps.
+#     - For Climate, Soil Health, Fertilizer, Schemes, and Market: include the key points relevant to that topic.
+#     - Omit any section or sub-point for which no information was provided (do not insert placeholder notes).
+#     - Retain any original links or citations by including them inline or in parentheses.
+#     - Write in plain language and avoid technical jargon whenever possible.
+#   agent: reporting_analyst
+
+reporting_task:
+  description: >
+    Compile each agent’s findings into a concise, farmer-friendly report. Summaries should simplify long paragraphs into a straightforward structure while preserving the original content exactly.
+  expected_output: >
+    The report must include six sections: Crop, Climate, Soil Health, Fertilizer, Schemes, and Market.
+    For each section:
+    - Use a heading in the form " Information ()". For example:
+    - Crop: "Crop Information (Sugarcane)"
+    - Climate: "Climate Information (Salem)"
+    - Soil Health: "Soil Health Information (Vertisols)"
+    - Fertilizer: "Fertilizer Information (Sugarcane)"
+    - Schemes: "Schemes Information (General)"
+    - Market: "Market Information (Fertilizers)"
+    - Summarize only the provided details:
+    - For Crop: include season, varieties, growth cycle, crop management practices, new technologies, fertilizer and water management, and pre-harvest steps.
+    - For Climate detailing current weather information and other climate data relevant for {location} and so on for Soil Health, Fertilizer, Schemes, and Market: include the key points relevant to that topic.
+    - Omit any section or sub-point for which no information was provided (do not insert placeholder notes).
+    - Retain any original links or citations by including them inline or in parentheses.
+    - Write in plain language and avoid technical jargon whenever possible.
+  agent: reporting_analyst
+
+
+# translating_agent_task:
+#   description: >
+#     Translate the market report generated by the reporting analyst into Tamil. The translation must preserve the same structure, formatting, headings, and technical details, including all market pricing data, economic trends, and competitive analysis.
+#   expected_output: >
+#     A faithful and fully localized Tamil version of the market report that mirrors the original report’s structure and content. The translation should maintain all technical terminology, data insights, and formatting elements exactly as in the original.
+#   agent: translating_agent
+
+translating_agent_task:
+  description: >
+    Compile each agent’s findings into a concise, farmer-friendly report. Summaries should simplify long paragraphs into a straightforward structure while preserving the original content exactly and translate evryting into tamil.
+  expected_output: >
+    The report must include six sections: Crop, Climate, Soil Health, Fertilizer, Schemes, and Market.
+    For each section:
+    - Use a heading in the form " Information ()". For example:
+    - Crop: "Crop Information (Sugarcane)"
+    - Climate: "Climate Information (Salem)"
+    - Soil Health: "Soil Health Information (Vertisols)"
+    - Fertilizer: "Fertilizer Information (Sugarcane)"
+    - Schemes: "Schemes Information (General)"
+    - Market: "Market Information (Fertilizers)"
+    - Summarize only the provided details:
+    - For Crop: include season, varieties, growth cycle, crop management practices, new technologies, fertilizer and water management, and pre-harvest steps.
+    - For Climate detailing current weather information and other climate data relevant for {location} and so on for Soil Health, Fertilizer, Schemes, and Market: include the key points relevant to that topic.
+    - Omit any section or sub-point for which no information was provided (do not insert placeholder notes).
+    - Retain any original links or citations by including them inline or in parentheses.
+    - Write in plain language and avoid technical jargon whenever possible.
+    - at the end convert the whole report in tamil
+  agent: translating_agent
+
+
+
