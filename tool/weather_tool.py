@@ -11,7 +11,7 @@ class WeatherTool(BaseTool):
     args_schema = WeatherToolInput
 
     def _run(self, location: str) -> str:
-        api_key = "f2c5366300d4faa33357fae18a0c4ca4"
+        api_key = "xyz"
         base_url = "https://api.openweathermap.org/data/2.5/weather"
         params = {
             "q": location,
